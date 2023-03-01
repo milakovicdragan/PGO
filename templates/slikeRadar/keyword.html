@@ -1,0 +1,86 @@
+{% extends "_base.html" %}
+{% block title %}1289BOR station{% endblock %}
+{% block content %}
+
+    {% for post in images %}
+        <div class="d-flex flex-row justify-content-between mt-3">
+            <div class="d-flex">
+                <div class="p-2">
+                    <h4>Current picture of clouds and precipitation from radar station Borje.<br> Image created {{ post.descr }}</h4>
+                </div>
+
+            </div>
+            <div class="d-flex">
+                <div class="p-2">
+                    <form action="#">
+                        <button class="btn btn-secondary" type="submit">Older Image</button>
+                    </form>
+                </div>
+                <div class="p-2">
+                    <form action="{% url 'home' %}">
+                        <button class="btn btn-success" type="submit">Current Image</button>
+                    </form>
+                </div>
+                <div class="p-2">
+                    <form action="{% url 'borja_gif' %}">
+                        <button class="btn btn-primary" type="submit">Animation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{#        <div class=" row  mt-3 ">#}
+{#            #}
+{#            <div class=" col-6">#}
+{#                 <h4>Current picture of clouds and precipitation from radar station Borje.<br> Image created {{ post.descr }}</h4>#}
+{#            </div>#}
+{#            <div class=" col-2">ggg</div>#}
+{#            <div class=" mt-2 d-flex justify-content-end">#}
+{#            <form action="{% url 'home' %}">#}
+{#                    <button class=" btn btn-success" type="submit">Current Image</button>#}
+{#               </form>#}
+{#                 <a href="{% url 'home' %}">Current Image</a>#}
+{#            </div>#}
+{##}
+{#            <div class="mt-2 d-flex justify-content-end">#}
+{#               <form action="{% url 'borja_gif' %}">#}
+{#                    <button class="btn btn-primary" type="submit">Animation</button>#}
+{#               </form>#}
+{#              <a class="fcc-btn" href="{% url 'borja_gif' %}">Animation</a>#}
+{#            </div>#}
+{#        </div>#}
+
+            <img class="img-fluid" width="100%" height="auto" src="{{ post.img.url}}" alt="{{ post.title }}" >
+            {{ post.body|truncatewords:30|linebreaks }}
+
+    {% endfor %}
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if page_obj.has_previous %}#}
+{#            <a href="?page=1">&laquo; first</a>#}
+{#            <a href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#        {% endif %}#}
+{##}
+{#        <span class="current">#}
+{#            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+{#        </span>#}
+{##}
+{#        {% if page_obj.has_next %}#}
+{#            <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+{#            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>#}
+{#        {% endif %}#}
+{#    </span>#}
+{#</div>#}
+
+{% block pagination %}
+    {% for page_number in page_obj.paginator.page_range %}
+        <a
+            href="{% url 'terms-by-page' page_number %}"
+            class="{% if page_number == page_obj.number %}current{% endif %}"
+        >
+            {{page_number}}
+        </a>
+    {% endfor %}
+{% endblock %}
+
+
+{% endblock %}

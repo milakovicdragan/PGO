@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}BOR station Archiva{% endblock %}
+{% block content %}
+
+
+    {% if images.descr %}
+        <div class="d-flex flex-row justify-content-between mt-0">
+            <div class="d-flex">
+                <div class="p-2">
+                    <h3 class="lead display-6">Picture of clouds and precipitation from radar station Borje.<br> Image created {{ images.descr }}</h3>
+                </div>
+
+            </div>
+            <div class="d-flex">
+                <div class="p-2">
+                    <form action="{% url 'home' %}">
+                        <button class="btn btn-success" type="submit">Current Image</button>
+                    </form>
+                </div>
+                <div class="p-2">
+                    <form action="{% url 'borja_gif' %}">
+                        <button class="btn btn-primary" type="submit">Animation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap flex-row  justify-content-sm-between justify-content-md-between mt-0">
+{#        start of archive url pages#}
+         {% for post in probas reversed %}
+            <div class="d-flex">
+                <div class="p-1">
+                    <form action="{{ post.get_absolute_url }}">
+                        {% if post.pk == images.pk %}
+                            <button class="btn btn-primary" type="submit">{{ post.time_create }}</button>
+                        {% else %}
+                            <button class="btn btn-secondary" type="submit">{{ post.time_create }}</button>
+                        {% endif %}
+                    </form>
+                </div>
+            </div>
+        {% endfor %}
+        </div>
+            <img class="img-fluid" width="100%" height="auto" src="{{ images.img.url}}" alt="{{ images.title }}" >
+            {{ post.body|truncatewords:30|linebreaks }}
+    {% endif %}
+{% endblock %}

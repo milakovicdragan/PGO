@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% block title %}VIL img Archiva{% endblock %}
+{% block content %}
+
+    {#<form action="{% url 'archiva_search' %}" method="get">#}
+    {#  <input name="q" type="text" placeholder="Search...">#}
+    {#</form>#}
+    {%  if images %}
+        {% for post in images %}
+        <div class="d-flex flex-row justify-content-between mt-3">
+            <div class="d-flex">
+                <div class="p-2">
+                    <h3 class="text_description">VIL archiva from radar station.<br> Image created {{ post.descr }}</h3>
+                </div>
+
+            </div>
+            <div class="d-flex w-25">
+                <div class="p-2">
+                    <label for="exampleInputEmail1" class="form-label mb-3"><strong>Please select UTC
+                        time:</strong></label>
+{#                    {% for a, b in mylist %}#}
+                    <form action="{% url 'archiva_search_vil' %}" method="get">
+
+                            <label for="time">Time</label>
+                            <input id="archiveTimePicker" name="q" type="time" class="time"
+                                   placeholder="{{ a.time_create }}">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+
+
+{#                        {% endfor %}#}
+                </div>
+
+            </div>
+        </div>
+        <img class="img-fluid" width="100%" height="auto" src="{{ post.img.url }}" alt="{{ post.title }}">
+        {{ post.body|truncatewords:30|linebreaks }}
+    {% endfor %}
+    {% else %}
+        <div class="d-flex flex-row justify-content-between mt-3">
+
+            <div class="d-flex w-50">
+                <div class="p-2">
+                    <label for="exampleInputEmail1" class="formlabel- ms-3"><span class="'lead display-6">Please select UTC
+                        time:</span></label>
+{#                    {% for a, b in mylist %}#}
+                    <form action="{% url 'archiva_search_vil' %}" method="get" class="mt-4 ms-3">
+
+                            <label for="time">Time</label>
+                            <input id="archiveTimePicker" name="q" type="time" class="time"
+                                   placeholder="{{ a.time_create }}">
+                            <button type="submit" class="ms-3 btn btn-primary">Submit</button>
+                    </form>
+
+
+{#                        {% endfor %}#}
+                </div>
+
+            </div>
+        </div>
+    {% endif %}
+    <script>
+                                {% for a in first_query %}
+                                var firstTime = "{{ a.time_create }}";
+                                {% endfor %}
+                                {% for a in last_query %}
+                                var lastTime = "{{ a.time_create }}";
+                                {% endfor %}
+
+                                $(function () {
+
+                                    $('#archiveTimePicker').timepicker({
+
+                                        // options here
+                                        'startTime': firstTime,
+                                        'setTime': '11:11',
+                                        'maxTime': firstTime,
+                                        'minTime': lastTime,
+                                        'show2400': 'false',
+                                        'timeFormat': 'H:i',
+                                        'step': 30,
+                                        'showDuration': true
+
+
+                                    });
+
+                                });
+
+                            </script>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<form action="{% url 'archiva_search' %}" method="get">
+  <input name="q" type="text" placeholder="Search...">
+</form>
+
+{% endblock %}

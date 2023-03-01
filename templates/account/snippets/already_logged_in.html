@@ -1,0 +1,7 @@
+
+{% load account %}
+
+<div class="alert alert-info" role="alert">
+{% user_display user as user_display %}
+<p><strong>Note:</strong> You are already logged in as <strong class="text-capitalize"> {{ user_display }}.</strong></p>
+</div>

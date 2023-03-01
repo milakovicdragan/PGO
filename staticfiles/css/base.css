@@ -1,0 +1,57 @@
+
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 1024px!important;
+  }
+}
+@media (min-width: 1900px) {
+  .container {
+    max-width: 1536px!important;
+  }
+}
+@media (min-width: 2100px) {
+  .container {
+    max-width: 1792px!important;
+  }
+}
+
+
+
+body {
+    /*min-height: 75rem;*/
+    padding-top: 4.5rem;
+  }
+  
+  h1 {
+      color: dimgrey;
+    }
+  
+  img.bookcover {
+    height: 100px;
+    width: auto;
+  }
+
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #234E5A;
+
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    /*background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));*/
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    /*background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))*/
+}
+
+/*prvami da na home page hrefr iygleda kao dugme*/
+.fcc-btn {
+  background-color: #199319!important;
+  color: white!important;
+  padding: 15px 25px!important;
+  text-decoration: none!important;
+
+
+}
+
+/*Ya novi nav bar i side bar*/

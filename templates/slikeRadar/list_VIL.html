@@ -1,0 +1,169 @@
+{% extends "base.html" %}
+{% block head %}
+<meta charset="utf-8" http-equiv="refresh" content="30">
+{% endblock %}
+{% block title %}VIL last image{% endblock %}
+{% block content %}
+
+    {% for post in images %}
+        <div class="d-flex">
+                <div class="h3text">
+                    <h3>VIL product is an integration of reflectivity throughout the height/depth of a particular storm.</h3>
+                </div>
+        </div>
+        <div class="d-flex">
+                <div class="h3text">
+                    <h4>Vertically integrated Liquid</h4>
+                </div>
+        </div>
+        <div class="d-flex flex-row justify-content-between mt-3">
+            <div class="d-flex">
+                <div class="p-2">
+                    <h4 class="text_description">Last CMax image from radar station.<br> Image created {{ post.descr }}</h4>
+                </div>
+            </div>
+            <div class="d-flex">
+                <div class="p-2">
+                    <form action="{% url 'archiva_search_vil' %}">
+                        <button class="btn btn-secondary" type="submit">Archive</button>
+                    </form>
+                </div>
+                <div class="p-2">
+                    <form action="{% url 'home_vil' %}">
+                        <button class="btn btn-success" type="submit">Current</button>
+                    </form>
+                </div>
+                <div class="p-2">
+                    <form action="{% url 'gif_vil' %}">
+                        <button class="btn btn-primary" type="submit">Animation</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+{#        <div class=" row  mt-3 ">#}
+{#            #}
+{#            <div class=" col-6">#}
+{#                 <h4>Current picture of clouds and precipitation from radar station Borje.<br> Image created {{ post.descr }}</h4>#}
+{#            </div>#}
+{#            <div class=" col-2">ggg</div>#}
+{#            <div class=" mt-2 d-flex justify-content-end">#}
+{#            <form action="{% url 'home' %}">#}
+{#                    <button class=" btn btn-success" type="submit">Current Image</button>#}
+{#               </form>#}
+{#                 <a href="{% url 'home' %}">Current Image</a>#}
+{#            </div>#}
+{##}
+{#            <div class="mt-2 d-flex justify-content-end">#}
+{#               <form action="{% url 'borja_gif' %}">#}
+{#                    <button class="btn btn-primary" type="submit">Animation</button>#}
+{#               </form>#}
+{#              <a class="fcc-btn" href="{% url 'borja_gif' %}">Animation</a>#}
+{#            </div>#}
+{#        </div>#}
+
+            <img class="img-fluid" width="100%" height="auto" src="{{ post.img.url}}" alt="{{ post.title }}" >
+            {{ post.body|truncatewords:30|linebreaks }}
+
+    {% endfor %}
+{##}
+{##}
+    {#   Start of  paggg#}
+{#    <ul class="pagination">#}
+        {# start of next page #}
+{#        {% if page_obj.has_next %}#}
+{#            <li class="page-item">#}
+{#                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" href="?page=#">Next</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+        {# end of next page  #}
+{##}
+{##}
+        {#  current page   #}
+{#        <li class="page-item active"><a class="page-link " href="#">#}
+{#            {% for t in page_obj %}#}
+{#                {{ t.time_create }}#}
+{#            {% endfor %}#}
+{#        </a></li>#}
+        {# end of current page#}
+{##}
+        {# start of Previous page  #}
+{#        {% if page_obj.has_previous %}#}
+{#            <li class="page-item ">#}
+{#                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" href="?page=#">Previous</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+        {# End of Privous page #}
+{##}
+{##}
+{#    </ul>#}
+    {#end of paggg#}
+{##}
+{##}
+{##}
+{#<div class="pagination">#}
+{#    <span class="step-links">#}
+{#        {% if page_obj.has_previous %}#}
+{#            <a href="?page=1">&laquo; first</a>#}
+{#            <a href="?page={{ page_obj.previous_page_number }}">previous</a>#}
+{#        {% endif %}#}
+{#        <span class="current">#}
+{#            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.#}
+{#            {% for t in page_obj.object_list %}#}
+{#                {{ t.time_create }}#}
+{#            {% endfor %}#}
+{#        </span>#}
+{##}
+{#        {% if page_obj.has_next %}#}
+{#            <a href="?page={{ page_obj.next_page_number }}">next</a>#}
+{#            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>#}
+{#        {% endif %}#}
+{#    </span>#}
+{#</div>#}
+
+
+{#   Start of  paggg#}
+{#    <ul class="pagination">#}
+{#         start of Previous page#}
+{#        {% if page_obj.has_previous %}#}
+{#            <li class="page-item ">#}
+{#                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" href="?page=#">Previous</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#         End of Privous page#}
+{##}
+{#          current page#}
+{#        <li class="page-item active"><a class="page-link " href="#">#}
+{#            {% for t in page_obj.object_list %}#}
+{#                {{ t.time_create }}#}
+{#            {% endfor %}#}
+{#        </a></li>#}
+{#         end of current page#}
+{##}
+{#         start of next page#}
+{#        {% if page_obj.has_next %}#}
+{#            <li class="page-item">#}
+{#                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>#}
+{#            </li>#}
+{#        {% else %}#}
+{#            <li class="page-item disabled">#}
+{#                <a class="page-link" href="?page=#">Next</a>#}
+{#            </li>#}
+{#        {% endif %}#}
+{#         end of next page#}
+{#    </ul>#}
+{#end of paggg#}
+
+
+{% endblock %}
