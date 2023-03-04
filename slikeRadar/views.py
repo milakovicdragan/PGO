@@ -9,6 +9,7 @@ from django.shortcuts import render
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.utils import timezone
+from django.contrib import messages
 
 
 # Create your views here.
@@ -63,9 +64,17 @@ class SearchResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = Slike.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            #provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            #ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING, 'No data found in database for time {}UTC!'.format(query))
 
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
@@ -132,9 +141,17 @@ class SearchHMaxResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+        print(query)
+        if query is not None and query !='':
             object_list = SlikeHmax.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING, 'No data found in database for time {}UTC!'.format(query))
 
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
@@ -201,9 +218,19 @@ class SearchBaseResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeBase.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 
@@ -269,9 +296,19 @@ class SearchCMaxnoCorResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeCMaxnoCor.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 
@@ -337,9 +374,18 @@ class SearchCappiResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeCappi.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
 
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
@@ -406,9 +452,19 @@ class SearchNowcastResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeNowcast.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 
@@ -474,9 +530,19 @@ class SearchCMaxZDRResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeCMaxZDR.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 
@@ -542,9 +608,19 @@ class SearchCMaxRainRateResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeCMaxRainRate.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 
@@ -606,9 +682,19 @@ class SearchVILResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikeVIL.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 # used for VIL
@@ -668,9 +754,19 @@ class SearchPPIResultsView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):  # new
         query = self.request.GET.get("q", None)
-        if query:
+
+        if query is not None and query !='':
             object_list = SlikePPI.objects.filter(Q(time_create__icontains=query))
-            return object_list
+            # provjeravam da li je prazan Query set tj da li ima podatak u db  za vrijednost q ako ima izvrsi sledece
+            if object_list.exists():
+                print(query)
+                print(object_list)
+                return object_list
+            # ovde treba da iskoci alarm messages tj kada nema uneseno vrijeme onda da iskoci alalrm message
+            print(object_list)
+            messages.add_message(self.request, messages.WARNING,
+                                 'No data found in database for time {}UTC!'.format(query))
+
         # return Slike.objects.all().order_by('-title')[:1]
         # return Slike.objects.filter(Q(time_create__icontains='None'))
 

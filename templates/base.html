@@ -230,7 +230,10 @@
         </div>
         <div class="col py-3">
            <div class="container">
+                {# ukljucujem html stranicu za ispisivanje gresaka na sve serch stranice  #}
+                {% include 'slikeRadar/messages.html' %}
                 {% block content %}
+
                 {% endblock content %}
             </div>
         </div>
