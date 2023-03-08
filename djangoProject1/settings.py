@@ -43,12 +43,10 @@ INSTALLED_APPS = [
     # to o run code on a schedule 'django_q
     'django_q',
     #ya filtriranje na stranici koristim ovu app
-    "django_filters",
-    #widget za datum i vrijeme
-    "bootstrap_datepicker_plus",
+    #"django_filters",
+
     #django app koja sprecava da se dva usera uloguju sa istim username i paswordom
     #potrebno je i MIDDLEWARE_CLASSES  definisati
-   # 'preventconcurrentlogins',
     # bilt in django apps
     "django.contrib.admin",
     "django.contrib.auth",
