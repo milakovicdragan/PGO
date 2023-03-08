@@ -23,7 +23,9 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # User management
     path("accounts/", include("allauth.urls")),  # new
-   
+    path('', include("slikeRadar.urls")),
 ]
 
-
+#ukoliko je setting u DEBUG mode True moramo dodati media_url inace necemo moci vidjeti slike
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
